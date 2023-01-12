@@ -7,6 +7,124 @@
     <title>Rock-Paper-Scissors</title>
 </head>
 <body>
-    
+    <div>
+        <h1>Hi, this is Rock-Paper-Scissors website its playable
+            on the console, please press f12 Key :D
+        </h1>
+        <script>
+            let PlayerSelection;
+            let puntosPlayer = 0;
+                let puntosPc = 0;
+
+            function getComputerChoice(){
+                let decision = 0;
+                while(decision === 0 || decision === 3 ){
+                    decision = Math.floor(Math.random() * 5)
+                }
+                return decision;
+            }
+
+            function Game(){
+                console.log(`Resetting last points, all back to 0`)
+                puntosPc = 0;
+                puntosPlayer = 0;
+                let posellama = true
+                while(posellama){
+                    singleGame();
+
+                    if(puntosPlayer > 4 || puntosPc > 4)
+                    {
+                        console.log(`We got a winner mate, crazy`)
+                        posellama = false;
+                    }
+                }
+            }
+
+            function singleGame(PcChoice = getComputerChoice()){
+                let PlayerSelected = prompt("What do you choose, Rock paper or Scissors?", "")
+                let PcChoiced = PcChoice;
+                let pcSelection = convertNumber(PcChoiced)
+                let playerselection = convertString(PlayerSelected);
+
+
+                if (playerselection === 5){
+                    console.log("Sorry, we need you to enter a valid value, Try again uwu")
+                    console.log("Can be: Rock, Paper or Scissors")
+                } else {
+                   let resultado  =  comparer(playerselection,PcChoiced)
+                   ganador(resultado);
+                    marcador(resultado); 
+                }
+               
+                function marcador(value){
+                    let ganalapc = value;
+                    if(ganalapc === 2){
+
+                    }
+                    else if(ganalapc===0){
+                        puntosPlayer = puntosPlayer + 1;
+                    }else{
+                        puntosPc = puntosPc + 1;
+                    }
+                    console.log(`Tus Puntos: ${puntosPlayer} // Puntos Pc: ${puntosPc}  `)
+                }
+                function ganador(value){
+                    let ganado = value;
+                    if(ganado === 2){
+                        console.log(`Crazy, this round was a tie, both of you selected ${pcSelection} `)
+                    }
+                     else if(ganado === 0){
+                        console.log(`You Won, ${PlayerSelected} beats ${pcSelection} `)
+                    }else {
+                        console.log(`The Pc won, ${pcSelection} beats ${PlayerSelected} `)
+                    }
+                }
+                
+
+            }
+            function comparer(pchoice,pcchoice){
+                    let result ;
+                    let PlayerNumber = pchoice;
+                    let PcNumber = pcchoice;
+                    let cosillo = PlayerNumber - PcNumber;
+                    if(cosillo === 0){
+                        result = 2;
+                    }
+                    else if(cosillo === -1 || cosillo === 3 || cosillo === -2){
+                        result = 1
+                    } else {
+                        result = 0;
+                    }
+                    return result
+                }
+                function convertNumber(num){
+                    let stringo;
+                    let numPassed = num
+                    if(numPassed === 1){
+                    stringo = "Rock";
+                } else if(numPassed ===2){
+                    stringo = "Paper";
+                } else {
+                    stringo = "Scissors";
+                }
+             return stringo;
+                }
+            function convertString(string){
+                let numberto
+                let stringPassed = string;
+                stringPassed = stringPassed.toLowerCase();
+                if(stringPassed === "rock"){
+                    numberto = 1;
+                } else if(stringPassed ==="paper"){
+                    numberto = 2;
+                } else if(stringPassed === "scissors") {
+                    numberto = 4;
+                }else {
+                    numberto = 5;
+                }
+                return numberto;
+            }
+        </script>
+    </div>
 </body>
 </html>
